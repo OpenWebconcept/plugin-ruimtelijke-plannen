@@ -37,7 +37,7 @@ class ConnectedField extends CreatesFields
     public function create(WP_Post $post): array
     {
         $model          = RuimtelijkPlanModel::makeFrom($post);
-        $showOnTermIDs = $this->getShowOnTermIDs($model);
+        $showOnTermIDs  = $this->getShowOnTermIDs($model);
 
         return $this->getConnectedItems($showOnTermIDs, $model->getID());
     }

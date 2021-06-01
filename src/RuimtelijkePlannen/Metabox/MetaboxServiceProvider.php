@@ -19,7 +19,7 @@ class MetaboxServiceProvider extends MetaboxBaseServiceProvider
     public function registerMetaboxes($rwmbMetaboxes)
     {
         $configMetaboxes  = $this->plugin->config->get('metaboxes');
-        $metaboxes = [];
+        $metaboxes        = [];
 
         // add metabox if plugin setting is checked.
         if ($this->plugin->settings->useShowOn()) {

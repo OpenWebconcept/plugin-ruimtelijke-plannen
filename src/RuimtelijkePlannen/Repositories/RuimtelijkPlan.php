@@ -62,13 +62,13 @@ class Ruimtelijkplan extends AbstractRepository
             'meta_query' => [
                 'relation' => 'OR',
                 [
-                    'key' => '_owc_spatial_plans_expiration_date',
-                    'value' => date('Y-m-d H:i:s'),
+                    'key'     => '_owc_spatial_plans_expiration_date',
+                    'value'   => date('Y-m-d H:i:s'),
                     'compare' => '>',
-                    'type' => 'DATE'
+                    'type'    => 'DATE'
                 ],
                 [
-                    'key' => '_owc_spatial_plans_expiration_date',
+                    'key'     => '_owc_spatial_plans_expiration_date',
                     'compare' => 'NOT EXISTS',
                 ],
             ]
@@ -79,7 +79,7 @@ class Ruimtelijkplan extends AbstractRepository
      * Add parameters to tax_query used for filtering items on selected blog (id) slugs.
      *
      * @param string $blogSlug
-     * 
+     *
      * @return array
      */
     public static function addShowOnParameter(string $blogSlug): array
