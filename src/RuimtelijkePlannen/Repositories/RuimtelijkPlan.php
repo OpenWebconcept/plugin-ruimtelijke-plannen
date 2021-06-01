@@ -5,7 +5,7 @@ namespace OWC\RuimtelijkePlannen\Repositories;
 use OWC\RuimtelijkePlannen\Models\RuimtelijkPlan as RuimtelijkPlanModel;
 use WP_Post;
 
-class RuimtelijkPlan extends AbstractRepository
+class Ruimtelijkplan extends AbstractRepository
 {
     protected $posttype = 'spatial_plan';
 
@@ -48,10 +48,6 @@ class RuimtelijkPlan extends AbstractRepository
      */
     public function makePortalURL(string $slug): string
     {
-        if (empty($this->plugin->settings->getPortalURL()) && empty($this->plugin->settings->getPortalItemSlug())) {
-            return '';
-        }
-
         return sprintf('%s/%s/%s', $this->plugin->settings->getPortalURL(), $this->plugin->settings->getPortalItemSlug(), $slug);
     }
 

@@ -10,8 +10,10 @@ return [
          *      'condition' => \Closure
          * ]
          */
-        'ruimtelijke-plannen'   => [
-            'fields' => [],
+        'ruimtelijkplan'   => [
+            'fields' => [
+                'related' => OWC\RuimtelijkePlannen\RestAPI\ItemFields\ConnectedField::class
+            ],
         ]
     ],
 ];

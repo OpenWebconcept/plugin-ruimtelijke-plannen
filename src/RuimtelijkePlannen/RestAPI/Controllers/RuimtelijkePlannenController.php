@@ -2,7 +2,7 @@
 
 namespace OWC\RuimtelijkePlannen\RestAPI\Controllers;
 
-use OWC\RuimtelijkePlannen\Repositories\RuimtelijkPlan;
+use OWC\RuimtelijkePlannen\Repositories\Ruimtelijkplan;
 use WP_Error;
 use WP_REST_Request;
 
@@ -10,12 +10,12 @@ class RuimtelijkePlannenController extends BaseController
 {
     public function getItems(WP_REST_Request $request)
     {
-        $items = (new RuimtelijkPlan($this->plugin))
+        $items = (new Ruimtelijkplan($this->plugin))
             ->query($this->getPaginatorParams($request))
-            ->query(RuimtelijkPlan::addFilterExpirationDateParameters());
+            ->query(Ruimtelijkplan::addFilterExpirationDateParameters());
 
         if ($this->showOnParamIsValid($request)) {
-            $items->query(RuimtelijkPlan::addShowOnParameter($request->get_param('source')));
+            $items->query(Ruimtelijkplan::addShowOnParameter($request->get_param('source')));
         }
 
         $data  = $items->all();
@@ -37,8 +37,8 @@ class RuimtelijkePlannenController extends BaseController
     {
         $id = (int) $request->get_param('id');
 
-        $item = (new RuimtelijkPlan($this->plugin))
-            ->query(RuimtelijkPlan::addFilterExpirationDateParameters())
+        $item = (new Ruimtelijkplan($this->plugin))
+            ->query(Ruimtelijkplan::addFilterExpirationDateParameters())
             ->find($id);
 
         if (!$item) {
@@ -61,8 +61,8 @@ class RuimtelijkePlannenController extends BaseController
     {
         $slug = $request->get_param('slug');
 
-        $item = (new RuimtelijkPlan($this->plugin))
-            ->query(RuimtelijkPlan::addFilterExpirationDateParameters())
+        $item = (new Ruimtelijkplan($this->plugin))
+            ->query(Ruimtelijkplan::addFilterExpirationDateParameters())
             ->findBySlug($slug);
 
         if (!$item) {

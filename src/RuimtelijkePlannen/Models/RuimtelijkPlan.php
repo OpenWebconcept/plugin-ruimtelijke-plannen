@@ -47,7 +47,7 @@ class RuimtelijkPlan
      *
      * @param \WP_Post $post
      *
-     * @return Persbericht
+     * @return RuimtelijkPlan
      */
     public static function makeFrom(\WP_Post $post)
     {
