@@ -19,6 +19,12 @@ return [
                     'desc' => __('URL for spatial plans items in the portal, eg "ruimtelijk-plan"', 'ruimtelijke-plannen'),
                     'id'   => 'setting_portal_spatial_plan_item_slug',
                     'type' => 'text',
+                ],
+                'openpub_enable_show_on' => [
+                    'name' => __('Show on', 'ruimtelijke-plannen'),
+                    'desc' => __('Used for configuring on which websites an openpub-item should be displayed on.', 'ruimtelijke-plannen'),
+                    'id'   => 'setting_openpub_enable_show_on',
+                    'type' => 'checkbox'
                 ]
             ],
         ]

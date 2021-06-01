@@ -33,11 +33,17 @@ class SettingsPageOptions
         return $this->settings['_owc_setting_portal_spatial_plan_item_slug'] ?? '';
     }
 
+    public function useShowOn(): bool
+    {
+        return $this->settings['_owc_setting_openpub_enable_show_on'] ?? false;
+    }
+
     public static function make(): self
     {
         $defaultSettings = [
-            '_owc_setting_portal_url'                        => '',
-            '_owc_setting_portal_spatial_plan_item_slug'  => ''
+            '_owc_setting_portal_url'                    => '',
+            '_owc_setting_portal_spatial_plan_item_slug' => '',
+            '_owc_setting_openpub_enable_show_on'        => false
         ];
 
         $options = get_option('_owc_spatial_plans_settings', []);

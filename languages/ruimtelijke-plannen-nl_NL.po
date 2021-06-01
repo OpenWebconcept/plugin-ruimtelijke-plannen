@@ -77,3 +77,19 @@ msgstr "Portal ruimtelijke plannen item slug"
 #: config/settings.php:19
 msgid "URL for spatial plans items in the portal, eg \"ruimtelijk-plan\""
 msgstr "URL voor ruimtelijke plannen in de portal, bv \"ruimtelijk-plan\""
+
+#: config/settings.php:24 config/show_on_metabox.php:14 config/taxonomies.php:17 config/taxonomies.php:18
+msgid "Show on"
+msgstr "Tonen op"
+
+#: config/settings.php:25
+msgid "Used for configuring on which websites an openpub-item should be displayed on."
+msgstr "Wordt gebruikt voor het instellen van de websites waarop een openpub-item weergegeven moet worden."
+
+#: config/show_on_metabox.php:6
+msgid "External"
+msgstr "Extern"
+
+#: config/show_on_metabox.php:15
+msgid "Select websites where this item should be displayed on."
+msgstr "Selecteer websites waarop dit item getoond moet worden."

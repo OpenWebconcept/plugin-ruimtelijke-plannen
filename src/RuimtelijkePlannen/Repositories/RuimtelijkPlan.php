@@ -48,7 +48,7 @@ class RuimtelijkPlan extends AbstractRepository
      */
     public function makePortalURL(string $slug): string
     {
-        if (empty($this->plugin->settings->getPortalURL()) || empty($this->plugin->settings->getPortalItemSlug())) {
+        if (empty($this->plugin->settings->getPortalURL()) && empty($this->plugin->settings->getPortalItemSlug())) {
             return '';
         }
 
@@ -75,6 +75,27 @@ class RuimtelijkPlan extends AbstractRepository
                     'key' => '_owc_spatial_plans_expiration_date',
                     'compare' => 'NOT EXISTS',
                 ],
+            ]
+        ];
+    }
+
+    /**
+     * Add parameters to tax_query used for filtering items on selected blog (id) slugs.
+     *
+     * @param string $blogSlug
+     * 
+     * @return array
+     */
+    public static function addShowOnParameter(string $blogSlug): array
+    {
+        return [
+            'tax_query' => [
+                [
+                    'taxonomy' => 'openpub-show-on',
+                    'terms'    => sanitize_text_field($blogSlug),
+                    'field'    => 'slug',
+                    'operator' => 'IN'
+                ]
             ]
         ];
     }

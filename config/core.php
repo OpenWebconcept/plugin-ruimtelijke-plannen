@@ -5,10 +5,11 @@ return [
     // Service Providers.
     'providers'    => [
         // Global providers.
-        OWC\RuimtelijkePlannen\RestAPI\RestAPIServiceProvider::class,
         OWC\RuimtelijkePlannen\PostType\PostTypeServiceProvider::class,
         OWC\RuimtelijkePlannen\Metabox\MetaboxServiceProvider::class,
-        OWC\RuimtelijkePlannen\Settings\SettingsServiceProvider::class
+        OWC\RuimtelijkePlannen\RestAPI\RestAPIServiceProvider::class,
+        OWC\RuimtelijkePlannen\Settings\SettingsServiceProvider::class,
+        OWC\RuimtelijkePlannen\Taxonomy\TaxonomyServiceProvider::class
     ],
 
     /**

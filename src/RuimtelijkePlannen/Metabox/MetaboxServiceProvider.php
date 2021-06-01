@@ -21,10 +21,20 @@ class MetaboxServiceProvider extends MetaboxBaseServiceProvider
         $configMetaboxes  = $this->plugin->config->get('metaboxes');
         $metaboxes = [];
 
+        // add metabox if plugin setting is checked.
+        if ($this->plugin->settings->useShowOn()) {
+            $configMetaboxes = $this->getShowOnMetabox($configMetaboxes);
+        }
+
         foreach ($configMetaboxes as $metabox) {
             $metaboxes[] = $this->processMetabox($metabox);
         }
 
         return array_merge($rwmbMetaboxes, $metaboxes);
+    }
+
+    protected function getShowOnMetabox(array $configMetaboxes): array
+    {
+        return array_merge($configMetaboxes, $this->plugin->config->get('show_on_metabox'));
     }
 }

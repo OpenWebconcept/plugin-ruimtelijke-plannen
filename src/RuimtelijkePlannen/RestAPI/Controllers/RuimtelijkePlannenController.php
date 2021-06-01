@@ -14,6 +14,10 @@ class RuimtelijkePlannenController extends BaseController
             ->query($this->getPaginatorParams($request))
             ->query(RuimtelijkPlan::addFilterExpirationDateParameters());
 
+        if ($this->showOnParamIsValid($request)) {
+            $items->query(RuimtelijkPlan::addShowOnParameter($request->get_param('source')));
+        }
+
         $data  = $items->all();
         $query = $items->getQuery();
 
@@ -68,5 +72,25 @@ class RuimtelijkePlannenController extends BaseController
         }
 
         return $item;
+    }
+
+    /**
+     * Validate if show on param is valid.
+     * Param should be a numeric value.
+     *
+     * @param WP_REST_Request $request
+     * @return boolean
+     */
+    protected function showOnParamIsValid(WP_REST_Request $request): bool
+    {
+        if (empty($request->get_param('source'))) {
+            return false;
+        }
+
+        if (!is_numeric($request->get_param('source'))) {
+            return false;
+        }
+
+        return true;
     }
 }

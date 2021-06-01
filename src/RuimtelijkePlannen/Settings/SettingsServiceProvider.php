@@ -48,8 +48,9 @@ class SettingsServiceProvider extends MetaboxBaseServiceProvider
         $metaboxes       = [];
 
         if (CheckPluginActive::isPluginOpenPubBaseActive()) {
-            // unset setting because it is already defined in the openpub base plugin.
+            // unset settings because they are already defined in the openpub base plugin.
             unset($configMetaboxes['spatial_plans']['fields']['settings']['settings_spatial_plans_portal_url']);
+            unset($configMetaboxes['spatial_plans']['fields']['settings']['openpub_enable_show_on']);
         }
 
         foreach ($configMetaboxes as $metabox) {
