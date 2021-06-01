@@ -37,9 +37,9 @@ class ConnectedField extends CreatesFields
     public function create(WP_Post $post): array
     {
         $model          = RuimtelijkPlanModel::makeFrom($post);
-        $showOnTermIDs  = $this->getShowOnTermIDs($model);
+        $showOnTermSlugs  = $this->getShowOnTermSlugs($model);
 
-        return $this->getConnectedItems($showOnTermIDs, $model->getID());
+        return $this->getConnectedItems($showOnTermSlugs, $model->getID());
     }
 
     /**
@@ -47,7 +47,7 @@ class ConnectedField extends CreatesFields
      *
      * @return array
      */
-    protected function getShowOnTermIDs(RuimtelijkPlanModel $model): array
+    protected function getShowOnTermSlugs(RuimtelijkPlanModel $model): array
     {
         $terms = $model->getTerms('openpub-show-on');
 
@@ -56,21 +56,21 @@ class ConnectedField extends CreatesFields
         }
 
         return array_map(function ($term) {
-            return $term->term_id;
+            return $term->slug;
         }, $terms);
     }
 
     /**
      * Get connected items and exclude current post.
      *
-     * @param array $showOnTermIDs
+     * @param array $showOnTermSlugs
      * @param integer $postID
      *
      * @return array
      */
-    protected function getConnectedItems(array $showOnTermIDs, int $postID): array
+    protected function getConnectedItems(array $showOnTermSlugs, int $postID): array
     {
-        $items = $this->query($showOnTermIDs, $postID);
+        $items = $this->query($showOnTermSlugs, $postID);
 
         if (empty($items)) {
             return [];
@@ -96,20 +96,22 @@ class ConnectedField extends CreatesFields
     /**
      * Get connected items based on taxonomy.
      *
-     * @param array $showOnTermIDs
+     * @param array $showOnTermSlugs
      * @param integer $postID
      *
      * @return array
      */
-    protected function query(array $showOnTermIDs, int $postID): array
+    protected function query(array $showOnTermSlugs, int $postID): array
     {
+        $showOnTermSlugs = $this->filterShowOnTermSlugs($showOnTermSlugs);
+
         $args = [
             'post_type' => 'spatial_plan',
             'tax_query' => [
                 [
                     'taxonomy' => 'openpub-show-on',
-                    'field'    => 'term_id',
-                    'terms'    => $showOnTermIDs,
+                    'field'    => 'slug',
+                    'terms'    => $showOnTermSlugs,
                 ]
             ],
             'post__not_in' => [$postID]
@@ -118,5 +120,26 @@ class ConnectedField extends CreatesFields
         $query = new WP_Query($args);
 
         return $query->posts;
+    }
+
+    /**
+     * Only use the slug of the term that corresponds with the param 'source'.
+     * If the param 'source' is not set return all.
+     *
+     * @param array $showOnTermSlugs
+     * 
+     * @return array
+     */
+    protected function filterShowOnTermSlugs(array $showOnTermSlugs): array
+    {
+        $source = sanitize_text_field($_REQUEST['source'] ?? '');
+
+        if (empty($source) || !is_numeric($source)) {
+            return $showOnTermSlugs;
+        }
+
+        return array_filter($showOnTermSlugs, function ($term) use ($source) {
+            return $term == $source;
+        });
     }
 }
