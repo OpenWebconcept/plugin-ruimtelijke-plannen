@@ -14,7 +14,7 @@ class RuimtelijkePlannenController extends BaseController
             ->query($this->getPaginatorParams($request))
             ->query(Ruimtelijkplan::addFilterExpirationDateParameters());
 
-        if ($this->showOnParamIsValid($request)) {
+        if ($this->showOnParamIsValid($request) && $this->plugin->settings->useShowOn()) {
             $items->query(Ruimtelijkplan::addShowOnParameter($request->get_param('source')));
         }
 

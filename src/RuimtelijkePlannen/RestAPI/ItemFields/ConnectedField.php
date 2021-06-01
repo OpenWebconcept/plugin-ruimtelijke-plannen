@@ -36,7 +36,7 @@ class ConnectedField extends CreatesFields
      */
     public function create(WP_Post $post): array
     {
-        $model          = RuimtelijkPlanModel::makeFrom($post);
+        $model            = RuimtelijkPlanModel::makeFrom($post);
         $showOnTermSlugs  = $this->getShowOnTermSlugs($model);
 
         return $this->getConnectedItems($showOnTermSlugs, $model->getID());
@@ -103,23 +103,31 @@ class ConnectedField extends CreatesFields
      */
     protected function query(array $showOnTermSlugs, int $postID): array
     {
-        $showOnTermSlugs = $this->filterShowOnTermSlugs($showOnTermSlugs);
-
         $args = [
             'post_type' => 'spatial_plan',
-            'tax_query' => [
-                [
-                    'taxonomy' => 'openpub-show-on',
-                    'field'    => 'slug',
-                    'terms'    => $showOnTermSlugs,
-                ]
-            ],
             'post__not_in' => [$postID]
         ];
+
+        if ($this->plugin->settings->useShowOn()) {
+            $args['tax_query'] = $this->getTaxQuery($showOnTermSlugs);
+        }
 
         $query = new WP_Query($args);
 
         return $query->posts;
+    }
+
+    protected function getTaxQuery($showOnTermSlugs): array
+    {
+        $showOnTermSlugs = $this->filterShowOnTermSlugs($showOnTermSlugs);
+
+        return [
+            [
+                'taxonomy' => 'openpub-show-on',
+                'field'    => 'slug',
+                'terms'    => $showOnTermSlugs,
+            ]
+        ];
     }
 
     /**

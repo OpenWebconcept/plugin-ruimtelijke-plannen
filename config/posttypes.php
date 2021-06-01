@@ -15,7 +15,7 @@ return [
             'public'        => true,
             'show_ui'       => true,
             'supports'      => ['title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'comments'],
-            'menu_icon'     => 'dashicons-megaphone',
+            'menu_icon'     => 'dashicons-grid-view',
             'menu_position' => 6,
             'show_in_rest'  => true,
             'admin_cols'    => [

@@ -3,7 +3,7 @@
 namespace OWC\RuimtelijkePlannen\Support;
 
 use Closure;
-use OWC\Persberichten\Foundation\Plugin;
+use OWC\RuimtelijkePlannen\Foundation\Plugin;
 use WP_Post;
 
 abstract class CreatesFields

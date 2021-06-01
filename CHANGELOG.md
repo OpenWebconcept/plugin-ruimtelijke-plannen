@@ -1,3 +1,13 @@
+## [1.0.2]
+
+### Fix
+
+-   Only use 'show on' filtering in endpoints when setting is active.
+
+### Refactor
+
+-   Menu icon of cpt 'spatial_plan'.
+
 ## [1.0.1]
 
 ### Fix

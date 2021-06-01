@@ -3,8 +3,8 @@
 /**
  * Plugin Name:       Yard | Ruimtelijke plannen
  * Plugin URI:        https://www.openwebconcept.nl/
- * Description:       Mayor and City Counsel Members decisions plug-in enables municipalities to create posts based on the public decisions taken during their weekly meetings.
- * Version:           1.0.1
+ * Description:       Plugin enables CPT 'Spatial plans' and API endpoints including filtering based on taxonomy 'show-on'.
+ * Version:           1.0.2
  * Author:            Yard | Digital Agency
  * Author URI:        https://www.yard.nl/
  * License:           GPL-3.0
