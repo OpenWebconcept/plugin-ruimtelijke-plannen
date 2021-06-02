@@ -105,8 +105,10 @@ class ConnectedField extends CreatesFields
     {
         $args = [
             'post_type' => 'spatial_plan',
-            'post__not_in' => [$postID]
+            'post__not_in' => [$postID],
+            'meta_query' => $this->getMetaQuery()
         ];
+
 
         if ($this->plugin->settings->useShowOn()) {
             $args['tax_query'] = $this->getTaxQuery($showOnTermSlugs);
@@ -115,6 +117,23 @@ class ConnectedField extends CreatesFields
         $query = new WP_Query($args);
 
         return $query->posts;
+    }
+
+    protected function getMetaQuery(): array
+    {
+        return [
+            'relation' => 'OR',
+            [
+                'key'     => '_owc_spatial_plans_expiration_date',
+                'value'   => date('Y-m-d H:i:s'),
+                'compare' => '>',
+                'type'    => 'DATE'
+            ],
+            [
+                'key'     => '_owc_spatial_plans_expiration_date',
+                'compare' => 'NOT EXISTS',
+            ],
+        ];
     }
 
     protected function getTaxQuery($showOnTermSlugs): array
