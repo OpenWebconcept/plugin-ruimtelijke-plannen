@@ -1,0 +1,19 @@
+name: "plugin-ruimtelijke-plannen"
+
+publiccodeYmlVersion: 1.0
+url: "https://github.com/OpenWebconcept/plugin-ruimtelijke-plannen"
+
+platforms:
+  - "web"
+
+categories:
+  - "application-development"
+
+softwareType: "softwareAddon"
+
+description:
+  localisedName: "plugin-ruimtelijke-plannen"
+
+nl:
+  commonground:
+    layerType: "service"
