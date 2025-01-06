@@ -106,8 +106,6 @@ class DependencyChecker
     {
         if (!class_exists($dependency['name'])) {
             $this->markFailed($dependency, __('Class does not exist', 'ruimtelijke-plannen'));
-
-            return;
         }
     }
 
