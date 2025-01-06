@@ -65,8 +65,8 @@ class DependencyChecker
     {
         add_action('admin_notices', function () {
             $list = '<p>' . __(
-                'The following plugins are required to use the OpenPub:',
-                'public-decisions'
+                'The following plugins are required to use the RuimtelijkePlannen plugin:',
+                'ruimtelijke-plannen'
             ) . '</p><ol>';
 
             foreach ($this->failed as $dependency) {
@@ -105,7 +105,7 @@ class DependencyChecker
     private function checkClass(array $dependency)
     {
         if (!class_exists($dependency['name'])) {
-            $this->markFailed($dependency, __('Class does not exist', 'bw-besluiten'));
+            $this->markFailed($dependency, __('Class does not exist', 'ruimtelijke-plannen'));
 
             return;
         }
@@ -129,7 +129,7 @@ class DependencyChecker
         }
 
         if (!is_plugin_active($dependency['file'])) {
-            $this->markFailed($dependency, __('Inactive', 'bw-besluiten'));
+            $this->markFailed($dependency, __('Inactive', 'ruimtelijke-plannen'));
 
             return;
         }
@@ -137,7 +137,7 @@ class DependencyChecker
         // If there is a version lock set on the dependency...
         if (isset($dependency['version'])) {
             if (!$this->checkVersion($dependency)) {
-                $this->markFailed($dependency, __('Minimal version:', 'bw-besluiten') . ' <b>' . $dependency['version'] . '</b>');
+                $this->markFailed($dependency, __('Minimal version:', 'ruimtelijke-plannen') . ' <b>' . $dependency['version'] . '</b>');
             }
         }
     }
