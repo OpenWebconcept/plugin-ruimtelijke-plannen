@@ -1,3 +1,7 @@
+## Version 1.0.3
+
+- (feat): Check alternative filename for MetaBox Group dependency
+
 ## [1.0.2]
 
 ### Fix
